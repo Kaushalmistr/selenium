@@ -23,7 +23,8 @@ public class AmazoneProductCart {
 		AmazoneProductCart amazonTest = new AmazoneProductCart();
 
 //		 amazonTest.addProductToCartTest();
-		amazonTest.removeProductFromCartTest();
+//		amazonTest.removeProductFromCartTest();
+		amazonTest.addProductToSaveToLaterTest();
 
 	}
 
@@ -167,6 +168,75 @@ public class AmazoneProductCart {
 	}
 
 	public void addProductToSaveToLaterTest() {
+
+		WebDriver driver = webDriverInitialization();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		// Locators
+		String searchTextBox = "//form/div[2]/div/input";
+		String searchIcon = "//form/div[3]/div";
+		String firstResult = "//div[@cel_widget_id='MAIN-SEARCH_RESULTS-4']/descendant::div[4]";
+		String productTitle = "productTitle";
+		String productPriceToPay = "//span[@data-a-color='base']/descendant::span[4]";
+		String productDecimalPrice = "//span[@data-a-color='base']/descendant::span[6]";
+		String addToCartButton = "add-to-cart-button";
+		String addToCartSuccesMsg = "//div[@id='attachDisplayAddBaseAlert']/span";
+		String viewCart = "//span[@id='attach-sidesheet-view-cart-button']";
+//		String goToCartButton = "//span[@id='sw-gtc']/span";
+
+		String saveLaterLink = "//span[@class='a-size-small sc-action-save-for-later']/span/input";
+		String saveForLaterMssg = "//div[@class='a-padding-medium'][2]/span[1]";
+
+		// Steps
+		driver.get("https://www.amazon.in/");
+		driver.findElement(By.xpath(searchTextBox)).sendKeys("Iphone XR");
+		driver.findElement(By.xpath(searchIcon)).click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
+		driver.findElement(By.xpath(firstResult)).click();
+
+		String currentPageId = driver.getWindowHandle();
+		Set<String> windowsIds = driver.getWindowHandles();
+
+		// Switching to new tab
+		for (String tabIds : windowsIds) {
+			if (!currentPageId.equals(tabIds)) {
+				driver.switchTo().window(tabIds);
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
+			}
+		}
+
+		String productName = driver.findElement(By.id(productTitle)).getText();
+		System.out.println("Product Name : " + productName);
+
+		String productPrice = driver.findElement(By.xpath(productPriceToPay)).getText();
+		String decValues = driver.findElement(By.xpath(productDecimalPrice)).getText();
+		System.out.println("Product price to pay : " + productPrice + "." + decValues);
+
+		WebElement addToCartBtn = driver.findElement(By.id(addToCartButton));
+		js.executeScript("arguments[0].scrollIntoView();", addToCartBtn);
+		addToCartBtn.click();
+
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+
+		WebElement sucessMsg = new WebDriverWait(driver, Duration.ofSeconds(100))
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(addToCartSuccesMsg)));
+
+		System.out.println("SuccessMsg : " + sucessMsg.getText());
+
+		driver.findElement(By.xpath(viewCart)).click();
+
+//		driver.findElement(By.xpath(goToCartButton)).click();
+		// driver.findElement(By.linkText("viewCart")).submit();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+
+		driver.findElement(By.xpath(saveLaterLink)).click();
+
+		WebElement saveLaterMssg = new WebDriverWait(driver, Duration.ofSeconds(50))
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(saveForLaterMssg)));
+
+		System.out.println("" + saveLaterMssg.getText());
+
+		driver.quit();
 
 	}
 
