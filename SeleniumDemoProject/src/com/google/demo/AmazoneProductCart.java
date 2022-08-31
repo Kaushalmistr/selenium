@@ -105,11 +105,11 @@ public class AmazoneProductCart {
 		String productDecimalPrice = "//span[@data-a-color='base']/descendant::span[6]";
 		String addToCartButton = "add-to-cart-button";
 		String addToCartSuccesMsg = "//div[@id='attachDisplayAddBaseAlert']/span";
-//		String viewCart = "//span[@id='attach-sidesheet-view-cart-button']";
-		String goToCartButton = "//span[@id='sw-gtc']/span";
+		String viewCart = "//span[@id='attach-sidesheet-view-cart-button']";
+//		String goToCartButton = "//span[@id='sw-gtc']/span";
 
 		String deleteLink = "//span[@class='a-size-small sc-action-delete']/span/input";
-		String deleteSucessMsg = "div[@class='a-row sc-cart-header']/div/h1";
+		String deleteSucessMsg = "//div[@class='a-row sc-cart-header']/div";
 
 		// Steps
 		driver.get("https://www.amazon.in/");
@@ -148,7 +148,7 @@ public class AmazoneProductCart {
 
 		System.out.println("SuccessMsg : " + sucessMsg.getText());
 
-		driver.findElement(By.xpath(goToCartButton)).click();
+		driver.findElement(By.xpath(viewCart)).click();
 
 //		driver.findElement(By.xpath(goToCartButton)).click();
 		// driver.findElement(By.linkText("viewCart")).submit();
@@ -157,14 +157,12 @@ public class AmazoneProductCart {
 		driver.findElement(By.xpath(deleteLink)).click();
 //		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 
-		WebElement delSucessMsg = new WebDriverWait(driver, Duration.ofSeconds(100))
-				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(deleteLink)));
+		WebElement del = new WebDriverWait(driver, Duration.ofSeconds(50))
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(deleteSucessMsg)));
 
-		System.out.println("DeleteMsg : " + delSucessMsg.getText());
+		System.out.println("DeleteMsg : " + del.getText());
 
-		// driver.quit();
-
-		// driver.quit();
+		driver.quit();
 
 	}
 
