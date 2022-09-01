@@ -242,7 +242,7 @@ public class AmazoneProductCart {
 	}
 
 	public void removeProductFromSaveToLaterTest() {
-		
+
 		WebDriver driver = webDriverInitialization();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -312,21 +312,15 @@ public class AmazoneProductCart {
 
 		System.out.println("" + saveLaterMssg.getText());
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		
+
 		driver.findElement(By.xpath(deleteProductFromSaveToLater)).click();
-		
 
 		WebElement removeProductFromSaveToLater = new WebDriverWait(driver, Duration.ofSeconds(50))
 				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(deleteProductFromSaveToLaterMssg)));
-		
-		System.out.println("" + removeProductFromSaveToLater.getText());
-		
 
-		
-		
+		System.out.println("" + removeProductFromSaveToLater.getText());
 
 		driver.quit();
 
-		
 	}
 }
