@@ -307,7 +307,7 @@ public class AmazoneProductCart {
 
 		driver.findElement(By.xpath(saveLaterLink)).click();
 
-		WebElement saveLaterMssg = new WebDriverWait(driver, Duration.ofSeconds(50))
+		WebElement saveLaterMssg = new WebDriverWait(driver, Duration.ofSeconds(70))
 				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(saveForLaterMssg)));
 
 		System.out.println("" + saveLaterMssg.getText());
@@ -319,6 +319,7 @@ public class AmazoneProductCart {
 				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(deleteProductFromSaveToLaterMssg)));
 
 		System.out.println("" + removeProductFromSaveToLater.getText());
+	
 
 		driver.quit();
 
