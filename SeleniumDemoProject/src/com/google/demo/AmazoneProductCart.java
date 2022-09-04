@@ -261,8 +261,8 @@ public class AmazoneProductCart {
 		String saveLaterLink = "//span[@class='a-size-small sc-action-save-for-later']/span/input";
 		String saveForLaterMssg = "//div[@class='a-padding-medium'][2]/span[1]";
 		String deleteProductFromSaveToLater = "//span[@class='a-size-small sc-action-delete']/span/input";
-		String deleteProductFromSaveToLaterMssg = "//div[@class='sc-list-item-removed-msg']/div[2]/span/a";
-
+		String deleteProductFromSaveToLaterMssg = "//div[@class='sc-list-item-removed-msg']/div[1]/span/div/span";
+		
 		// Steps
 		driver.get("https://www.amazon.in/");
 		driver.findElement(By.xpath(searchTextBox)).sendKeys("Iphone XR");
@@ -319,7 +319,6 @@ public class AmazoneProductCart {
 				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(deleteProductFromSaveToLaterMssg)));
 
 		System.out.println("" + removeProductFromSaveToLater.getText());
-	
 
 		driver.quit();
 
