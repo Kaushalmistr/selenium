@@ -186,7 +186,7 @@ public class AmazoneProductCart {
 //		String goToCartButton = "//span[@id='sw-gtc']/span";
 
 		String saveLaterLink = "//span[@class='a-size-small sc-action-save-for-later']/span/input";
-		String saveForLaterMssg = "//div[@class='a-padding-medium'][2]/span[1]";
+		String saveForLaterMssg = "//div[@class='sc-list-item-removed-msg']";
 
 		// Steps
 		driver.get("https://www.amazon.in/");
@@ -261,7 +261,8 @@ public class AmazoneProductCart {
 		String saveLaterLink = "//span[@class='a-size-small sc-action-save-for-later']/span/input";
 		String saveForLaterMssg = "//div[@class='a-padding-medium'][2]/span[1]";
 		String deleteProductFromSaveToLater = "//span[@class='a-size-small sc-action-delete']/span/input";
-		String deleteProductFromSaveToLaterMssg = "//div[@class='sc-list-item-removed-msg']/div[1]/span/div/span";
+		String deleteProductFromSaveToLaterMssg = "//div[@id='sc-saved-cart-items']/div/div/div[1]/span/a";
+		String removeProductMssg = "//*[text()='was removed from Save For Later.']";
 		
 		// Steps
 		driver.get("https://www.amazon.in/");
@@ -320,7 +321,7 @@ public class AmazoneProductCart {
 
 		System.out.println("" + removeProductFromSaveToLater.getText());
 
-		driver.quit();
+//		driver.quit();
 
 	}
 }
