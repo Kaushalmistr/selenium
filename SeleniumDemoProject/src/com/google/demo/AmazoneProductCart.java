@@ -262,7 +262,7 @@ public class AmazoneProductCart {
 		String saveForLaterMssg = "//div[@class='a-padding-medium'][2]/span[1]";
 		String deleteProductFromSaveToLater = "//span[@class='a-size-small sc-action-delete']/span/input";
 		String deleteProductFromSaveToLaterMssg = "//div[@id='sc-saved-cart-items']/div/div/div[1]/span/a";
-		String removeProductMssg = "//*[text()='was removed from Save For Later.']";
+		String removeProductMssgName = "//*[contains(text(),'was removed from Save For Later.')]";
 		
 		// Steps
 		driver.get("https://www.amazon.in/");
@@ -316,10 +316,12 @@ public class AmazoneProductCart {
 
 		driver.findElement(By.xpath(deleteProductFromSaveToLater)).click();
 
-		WebElement removeProductFromSaveToLater = new WebDriverWait(driver, Duration.ofSeconds(50))
+		WebElement removeProductFromSaveToLaterMssg = new WebDriverWait(driver, Duration.ofSeconds(50))
 				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(deleteProductFromSaveToLaterMssg)));
 
-		System.out.println("" + removeProductFromSaveToLater.getText());
+		System.out.println("" + removeProductFromSaveToLaterMssg.getText());
+		
+		
 
 //		driver.quit();
 
