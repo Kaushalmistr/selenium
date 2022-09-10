@@ -22,9 +22,9 @@ public class AmazoneProductCart {
 
 		AmazoneProductCart amazonTest = new AmazoneProductCart();
 
-//		 amazonTest.addProductToCartTest();
-//		amazonTest.removeProductFromCartTest();
-//		amazonTest.addProductToSaveToLaterTest();
+		amazonTest.addProductToCartTest();
+		amazonTest.removeProductFromCartTest();
+		amazonTest.addProductToSaveToLaterTest();
 		amazonTest.removeProductFromSaveToLaterTest();
 
 	}
@@ -53,7 +53,7 @@ public class AmazoneProductCart {
 		String productTitle = "productTitle";
 		String productPriceToPay = "//span[@data-a-color='base']/descendant::span[4]";
 		String productDecimalPrice = "//span[@data-a-color='base']/descendant::span[6]";
-		String addToCartButton = "//span[@id='sw-gtc']/span";
+		String addToCartButton = "add-to-cart-button";
 		String addToCartSuccesMsg = "//div[@id='attachDisplayAddBaseAlert']/span";
 
 		// Steps
@@ -262,8 +262,10 @@ public class AmazoneProductCart {
 		String saveForLaterMssg = "//div[@class='a-padding-medium'][2]/span[1]";
 		String deleteProductFromSaveToLater = "//span[@class='a-size-small sc-action-delete']/span/input";
 		String deleteProductFromSaveToLaterMssg = "//div[@id='sc-saved-cart-items']/div/div/div[1]/span/a";
-		String removeProductMssgName = "//*[contains(text(),'was removed from Save For Later.')]";
-		
+		// String removeProductMssgName = "//*[contains(text(),'was removed from Save
+		// For Later.')]";
+		String removeProductMssgName = "//div[@id='sc-saved-cart-items']/div/div/div[1]/span";
+
 		// Steps
 		driver.get("https://www.amazon.in/");
 		driver.findElement(By.xpath(searchTextBox)).sendKeys("Iphone XR");
@@ -316,14 +318,18 @@ public class AmazoneProductCart {
 
 		driver.findElement(By.xpath(deleteProductFromSaveToLater)).click();
 
-		WebElement removeProductFromSaveToLaterMssg = new WebDriverWait(driver, Duration.ofSeconds(50))
-				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(deleteProductFromSaveToLaterMssg)));
+		// WebElement removeProductFromSaveToLaterMssg1 = new WebDriverWait(driver,
+		// Duration.ofSeconds(50))
+		// .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(deleteProductFromSaveToLaterMssg)));
 
-		System.out.println("" + removeProductFromSaveToLaterMssg.getText());
-		
-		
+		WebElement removeProductFromSaveToLaterMssg2 = new WebDriverWait(driver, Duration.ofSeconds(50))
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(removeProductMssgName)));
 
-//		driver.quit();
+		// System.out.println("Message 1 : " +
+		// removeProductFromSaveToLaterMssg1.getText());
+		System.out.println(removeProductFromSaveToLaterMssg2.getText());
+
+		driver.quit();
 
 	}
 }
